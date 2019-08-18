@@ -1,5 +1,9 @@
-use nom::character::complete::digit1;
+use super::ast::*;
+use nom::character::complete::{digit1, char};
 use nom::IResult;
+use nom::branch::alt;
+use nom::combinator::{map, opt};
+use nom::sequence::tuple;
 
 #[test]
 fn digit1_test() {
@@ -9,10 +13,6 @@ fn digit1_test() {
     assert_eq!("63", used);
     assert_eq!("abc", no_used);
 }
-
-use super::ast::*;
-use nom::branch::alt;
-use nom::combinator::map;
 
 ///式のパーサ
 pub fn expr_parser(s: &str) -> IResult<&str, Expr> {
@@ -48,9 +48,6 @@ pub fn expr_parser(s: &str) -> IResult<&str, Expr> {
         }
     })(s)
 }
-
-use nom::sequence::tuple;
-use nom::combinator::opt;
 
 ///項のパーサ
 pub fn term_parser(s: &str) -> IResult<&str, Expr> {
@@ -127,8 +124,6 @@ fn factor_parser_test() {
     let expect = Expr::ConstantVal(ConstantVal::new(3));
     assert_eq!(actual, expect);
 }
-
-use nom::character::complete::char;
 
 ///丸括弧で囲まれた式のパーサ
 pub fn paren_expr_parser(s: &str) -> IResult<&str, Expr> {
