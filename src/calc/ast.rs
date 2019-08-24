@@ -33,11 +33,11 @@ impl ConstantVal {
 
 #[test]
 fn constant_val_test() {
-    let source = 55;
-    let constant_val = ConstantVal::new(source);
+    let expect = 55;
+    let constant_val = ConstantVal::new(expect);
     assert_eq!(
         constant_val.eval(),
-        source
+        expect
     );
 }
 
