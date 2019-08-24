@@ -1,5 +1,3 @@
-extern crate nom;
-
 pub mod calc;
 
 use crate::calc::expr_eval;
